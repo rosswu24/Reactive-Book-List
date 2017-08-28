@@ -6,15 +6,15 @@ class NewBookForm extends Component{
 		super();
 		this.state = {
 			addAuthor: '',
-			addTitle:''
+			addTitle:'',
 		}
 	}
 
 	componentWillMount(){
-		// this.setState({
-		// addAuthor: '',
-		// addTitle: ''
-		// });
+		this.setState({
+		addAuthor: '',
+		addTitle: ''
+		});
 
 	}
 
@@ -40,28 +40,28 @@ class NewBookForm extends Component{
 
 	render(){
 		return(
-			<div>
-					<input
-						type="text"
-						name="author"
-						placeholder="Author"
-						onChange={this.handleAddAuthor.bind(this)}
-					/>
+ <div className="book-form">
+        <label htmlFor="book-form">Add New Book</label>
+        <br />
+        <input
+          type="text"
+          name="title"
+          placeholder="New Book Title"
+          className="inputField"
+          onChange={this.handleAddTitle.bind(this)}
+        />
+        <br />
+        <input
+          type="text"
+          name="title"
+          placeholder="New Book Author"
+          className="inputField"
+          onChange={this.handleAddAuthor.bind(this)}
+        />
+        <br/>
 
-					<br />
-
-					<input 
-					type="text"
-					name="title"
-					placeholder="book title"
-					onChange={this.handleAddTitle.bind(this)}
-					/>
-
-					<br />
-
-		<button onClick={this.props.addBook}>Add Book </button>
-
-			</div>
+        <button onClick={this.handleBookSubmit.bind(this)}>Submit</button>
+      </div>
 
 
 			)
