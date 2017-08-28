@@ -5,7 +5,7 @@ import BookFilterInput from'../../components/BookFilterInput';
 import Book from '../../components/Book';
 import BookList from '../BookList';
 import {getBooksFromFakeXHR, addBookToFakeXHR} from '../../lib/books.db.js';
-import NewBookForm from '../NewBookForm/index';
+import NewBookForm from '../NewBookForm';
 
 
 
@@ -35,18 +35,6 @@ class App extends Component {
 		console.log(err);
 	});
 
-	function addBook(){
-		addBookToFakeXHR()
-		.then(addBook=>{
-			this.setState({
-				newBook: addBook
-			});
-			console.log(addBook);
-		})
-		.catch(err=>{
-			console.log(err);
-		});
-	}
 		
 	}
 
@@ -64,6 +52,17 @@ class App extends Component {
 	//    changeAuthor: e.target.value
 	//  });
 	// }
+
+	addBook(book){
+		addBookToFakeXHR(book)
+		.then(book=>{
+			this.setState({
+				book});
+			})
+		.catch(err=>{
+			console.log(err);
+		});
+	}
 
 	handleFilterInputerChange(e){
 		this.setState({
