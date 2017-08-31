@@ -1,52 +1,47 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import Book from '../../components/Book';
 
 
-class NewBookForm extends Component{
-	constructor(){
-		super();
-		this.state = {
-			addAuthor: '',
-			addTitle:'',
-		}
-	}
+class NewBookForm extends Component {
+  constructor() {
+    super();
 
-	componentWillMount(){
-		this.setState({
-		addAuthor: '',
-		addTitle: ''
-		});
+    this.state = {
+      title: '',
+      author: ''
+    }
+  }
 
-	}
+  handleAddTitle(e){
+    this.setState({
+      title: e.target.value
+    });
+  }
 
-	handleAddAuthor(e){
-		this.setState({
-			addAuthor: e.target.value,
-		});
-	}
+  handleAddAuthor(e){
+    this.setState({
+      author: e.target.value
+    });
+  }
 
-	handleAddTitle(e){
-		this.setState({
-			addTitle:e.target.value
-		});
-	}
+  handleBookSubmit(){
+    let newBook = {
+      title: this.state.title,
+      author: this.state.author,
+    };
 
-		handleBookSubmit(){
-		var newBook = {
-			title: this.state.handleAddTitle,
-			author: this.state.handleAddAuthor
-		};
-			this.props.addBook(newBook);
-	}
+    this.props.addBook(newBook);
+  }
 
-	render(){
-		return(
- <div className="book-form">
+  render(){
+    return (
+      <div className="book-form">
         <label htmlFor="book-form">Add New Book</label>
         <br />
         <input
           type="text"
           name="title"
-          placeholder="New Book Title"
+          placeholder="Book Title"
           className="inputField"
           onChange={this.handleAddTitle.bind(this)}
         />
@@ -54,20 +49,16 @@ class NewBookForm extends Component{
         <input
           type="text"
           name="title"
-          placeholder="New Book Author"
+          placeholder="Author"
           className="inputField"
           onChange={this.handleAddAuthor.bind(this)}
         />
         <br/>
 
-        <button onClick={this.handleBookSubmit.bind(this)}>Submit</button>
+        <button onClick={this.handleBookSubmit.bind(this)}>Add Book</button>
       </div>
-
-
-			)
-	}
+    );
+  }
 }
-
-
 
 export default NewBookForm;

@@ -28,36 +28,36 @@ import React, { Component } from 'react';
 import Book from '../../components/Book';
 
 class BookList extends Component {
-  render(){
-    // console.log(this.props.filter) //this comes from app.js where filter = {this.state.bookFilterText}
-    return (
-      <ul>
-        {
-          this.props.books
-          .filter(book=>{
-            if (this.props.filter){
-              return book.author.toLowerCase().indexOf(this.props.filter.toLowerCase()) > -1
-            }else{
-              return book
-            }
+	render(){
+		// console.log(this.props.filter) //this comes from app.js where filter = {this.state.bookFilterText}
+		return (
+			<ul>
+				{
+					this.props.books
+					.filter(book=>{
+						if (this.props.filter){
+							return book.author.toLowerCase().indexOf(this.props.filter.toLowerCase()) > -1
+						}else{
+							return book
+						}
 
-            // return this.props.filter ? book.author.toLowerCase().indexOf(this.props.filter) >-1 : book;
-            // //? |  if something is true return null
-            // //: | else return book
-          })
-          .map(book =>{
-            return (
-              <Book
-                title={book.title}
-                author={book.author}
-                key={book._id}
-              />
-            )
-          })
-        }
-      </ul>
-    );
-  }
+						// return this.props.filter ? book.author.toLowerCase().indexOf(this.props.filter) >-1 : book;
+						// //? |  if something is true return null
+						// //: | else return book
+					})
+					.map(book =>{
+						return (
+							<Book
+								title={book.title}
+								author={book.author}
+								key={book._id}
+							/>
+						)
+					})
+				}
+			</ul>
+		);
+	}
 }
 
 export default BookList;

@@ -5,105 +5,106 @@ import BookFilterInput from'../../components/BookFilterInput';
 import Book from '../../components/Book';
 import BookList from '../BookList';
 import {getBooksFromFakeXHR, addBookToFakeXHR} from '../../lib/books.db.js';
-import NewBookForm from '../NewBookForm';
+import NewBookForm from '../NewBookForm/index';
 
 
 
 
 class App extends Component {
-	constructor() {
-	 super();
-	}
+  constructor() {
+   super();
+  }
 
-	componentWillMount() {
-	 console.log('sanity check: Component Will Mount');
+  componentWillMount() {
+   console.log('sanity check: Component Will Mount');
 
-	 this.setState({
-		// books:booksFromFakeDB,
-		books:[],
-		bookFilterText: '',
-	 });
+   this.setState({
+    // books:booksFromFakeDB,
+    books:[],
+    bookFilterText: '',
+   });
 
-	getBooksFromFakeXHR()
-	.then(books=>{
-		this.setState({
-			books: books //books on the right is from the thenable, left books is the key name
-		});
-		console.log(books);
-	})
-	.catch(err=>{
-		console.log(err);
-	});
+  getBooksFromFakeXHR()
+  .then(books=>{
+    this.setState({
+      books: books //books on the right is from the thenable, left books is the key name
+    });
+    console.log(books);
+  })
+  .catch(err=>{
+    console.log(err);
+  });
 
-		
-	}
-
-
-	// handleChangeTitle(e){
-	//  console.log('sanity check: Handle Change Title');
-	//  this.setState({
-	//    changeTitle: e.target.value
-	//  });
-	// }
-
-	// handleChangeAuthor(e){
-	//  console.log('sanity check: Handle Change Author');
-	//  this.setState({
-	//    changeAuthor: e.target.value
-	//  });
-	// }
-
-	addBook(book){
-		addBookToFakeXHR(book)
-		.then(book=>{
-			this.setState({
-				book});
-			})
-		.catch(err=>{
-			console.log(err);
-		});
-	}
-
-	handleFilterInputerChange(e){
-		this.setState({
-			bookFilterText: e.target.value
-		});
-	}
-
-	// addBook(e){
-	//  books.push(NewBookForm)
-	// }
-
-	render() {
-		return (
-		<div>
-
-			<BookListAppTitle
-				title="Book List"
-			/>
-
-			<br />
-
-			<BookFilterInput
-				filterInputChange={this.handleFilterInputerChange.bind(this)}
-			/>
-
-			<BookList
-			filter={this.state.bookFilterText}
-			books={this.state.books}
-			/>
-
-			<br />
-
-			<NewBookForm
-			addBook = {this.addBook.bind(this)}
-			/>
-
-		</div>
+    
+  }
 
 
-		);
-	}
+  // handleChangeTitle(e){
+  //  console.log('sanity check: Handle Change Title');
+  //  this.setState({
+  //    changeTitle: e.target.value
+  //  });
+  // }
+
+  // handleChangeAuthor(e){
+  //  console.log('sanity check: Handle Change Author');
+  //  this.setState({
+  //    changeAuthor: e.target.value
+  //  });
+  // }
+
+  addBook(newBook){
+    addBookToFakeXHR(newBook)
+    .then(addBook=>{
+      this.setState({
+        addBook: addBook
+      });
+      console.log(addBook);
+    })
+    .catch(err=>{
+      console.log(err);
+    });
+  }
+  handleFilterInputerChange(e){
+    this.setState({
+      bookFilterText: e.target.value
+    });
+  }
+
+  // addBook(e){
+  //  books.push(NewBookForm)
+  // }
+
+  render() {
+    return (
+    <div>
+
+      <BookListAppTitle
+        title="Book List"
+      />
+
+      <br />
+
+      <BookFilterInput
+        filterInputChange={this.handleFilterInputerChange.bind(this)}
+      />
+
+      <BookList
+      filter={this.state.bookFilterText}
+      books={this.state.books}
+      />
+
+      <br />
+
+      <NewBookForm
+      addBook = {this.addBook.bind(this)}
+      />
+
+    </div>
+
+
+    );
+  }
 }
 
 export default App;
